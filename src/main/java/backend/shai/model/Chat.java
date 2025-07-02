@@ -1,5 +1,13 @@
 package backend.shai.model;
 
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity(name = "chat")
 public class Chat {
     private Long id;
     private String name;
