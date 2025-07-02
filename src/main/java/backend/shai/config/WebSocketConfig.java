@@ -1,4 +1,5 @@
-package com.example.shai.config;
+package backend.shai.config;
+
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
