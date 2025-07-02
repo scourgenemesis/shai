@@ -1,10 +1,15 @@
 package backend.shai.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
 import java.time.LocalDateTime;
 
-
+@Entity(name = "message")
 public class Message {
     private String content;
+    @Id @GeneratedValue
     private Long id;
     private User sender;
     private User recipient;
@@ -22,11 +27,7 @@ public class Message {
     public Long getId() {
         return id;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    
     public User getRecipient() {
         return recipient;
     }
@@ -35,20 +36,12 @@ public class Message {
         this.recipient = recipient;
     }
 
-    public User getSender() {
-        return sender;
-    }
-
     public void setSender(User sender) {
         this.sender = sender;
     }
 
     public LocalDateTime getTimestamp() {
         return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
     }
 
     public MessageStatus getMessageStatus() {
