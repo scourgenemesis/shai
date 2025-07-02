@@ -31,7 +31,7 @@ public class Message {
     public User getRecipient() {
         return recipient;
     }
-    
+
     public void setSender(User sender) {
         this.sender = sender;
     }

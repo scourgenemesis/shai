@@ -9,6 +9,7 @@ import java.util.Set;
 
 @Entity(name = "chat")
 public class Chat {
+    @GeneratedValue @Id
     private Long id;
     private String name;
 
@@ -29,12 +30,15 @@ public class Chat {
     @ManyToOne(fetch = FetchType.LAZY)
     private User createdBy;
 
+    private final LocalDateTime createdAt = LocalDateTime.now();
+
+    private String avatarUrl;
+
+    private boolean isArchived;
+    private String description;
+
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -47,10 +51,6 @@ public class Chat {
 
     public ChatType getType() {
         return type;
-    }
-
-    public void setType(ChatType type) {
-        this.type = type;
     }
 
     public Set<User> getParticipants() {
@@ -73,16 +73,8 @@ public class Chat {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 
     public String getAvatarUrl() {
@@ -109,12 +101,7 @@ public class Chat {
         this.description = description;
     }
 
-    private LocalDateTime createdAt;
 
-    private String avatarUrl;
-
-    private boolean isArchived;
-    private String description;
 
     public enum ChatType {
         PRIVATE, GROUP, CHANNEL
