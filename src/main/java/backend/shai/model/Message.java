@@ -27,15 +27,11 @@ public class Message {
     public Long getId() {
         return id;
     }
-    
+
     public User getRecipient() {
         return recipient;
     }
-
-    public void setRecipient(User recipient) {
-        this.recipient = recipient;
-    }
-
+    
     public void setSender(User sender) {
         this.sender = sender;
     }
