@@ -1,9 +1,6 @@
 package backend.shai.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
@@ -14,7 +11,7 @@ public class PinnedMessage {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private Message message;
 
     @ManyToOne(fetch = FetchType.LAZY)
