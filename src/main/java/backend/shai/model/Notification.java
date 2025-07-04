@@ -29,10 +29,6 @@ public class Notification {
         this.content = content;
     }
 
-    public void setRecipient(User recipient) {
-        this.recipient = recipient;
-    }
-
     public boolean isRead() {
         return isRead;
     }
