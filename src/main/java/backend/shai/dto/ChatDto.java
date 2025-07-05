@@ -12,4 +12,6 @@ public class ChatDto {
         this.type = type;
         this.userIds = userIds;
     }
+
+
 }
