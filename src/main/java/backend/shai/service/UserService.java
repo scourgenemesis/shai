@@ -1,5 +1,4 @@
 package backend.shai.service;
 
-public class AuthService {
-    
+public class UserService {
 }
