@@ -1,4 +1,10 @@
 package backend.shai.repository;
 
-public class UserRepository {
+import backend.shai.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+
 }

@@ -12,7 +12,7 @@
 	<artifactId>shai</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>shai</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Shai web messenger</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -59,6 +59,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>4.0.0-M3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

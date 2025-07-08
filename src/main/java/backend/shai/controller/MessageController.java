@@ -27,6 +27,6 @@ public class MessageController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "50") int size
     ) {
-        return messageService.getMessages(messageService);
+
     }
 }
