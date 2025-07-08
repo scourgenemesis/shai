@@ -11,6 +11,8 @@ public class UserDto {
     @Size(min = 6, message = "Password must be at least 6 characters!")
     private String password;
 
+    private String avatarUrl;
+
     public String getUsername() {
         return username;
     }
@@ -25,5 +27,13 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

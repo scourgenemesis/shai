@@ -44,6 +44,10 @@ public class User {
         this.avatarUrl = avatarUrl;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public UserStatus getUserStatus() {
         return userStatus;
     }
