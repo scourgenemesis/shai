@@ -15,11 +15,13 @@ public class UserService {
         if (userRepo.existsByUsername(user.getUsername())) {
             throw new RuntimeException("Username taken!");
         }
-        
+        return userRepo.save(user);
     }
 
-    public User deteleUser(User user) {
+    
 
-    }
+//    public User deteleUser(User user) {
+//
+//    }
 
 }
