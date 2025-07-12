@@ -3,7 +3,7 @@ package backend.shai.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class UserDto {
+public class UserRequest {
     @NotBlank(message = "Username is required")
     private String username;
 

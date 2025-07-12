@@ -1,6 +1,6 @@
 package backend.shai.service;
 
-import backend.shai.dto.UserDto;
+import backend.shai.dto.UserRequest;
 import backend.shai.model.User;
 import backend.shai.repository.UserRepository;
 import jakarta.validation.constraints.NotNull;
@@ -22,15 +22,15 @@ public class UserService {
     @Autowired
     private FileStorageService fileStorageService;
 
-    public User registerUser(@NotNull UserDto userDto, MultipartFile avatarFile) throws IOException {
-        if (userRepo.existsByUsername(userDto.getUsername())) {
+    public User registerUser(@NotNull UserRequest userRequest, MultipartFile avatarFile) throws IOException {
+        if (userRepo.existsByUsername(userRequest.getUsername())) {
             throw new RuntimeException("Username taken!");
         }
 
         User user = new User();
-        user.setUsername(userDto.getUsername());
+        user.setUsername(userRequest.getUsername());
 
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 
         if (avatarFile != null && !avatarFile.isEmpty()) {
             String avatarUrl = fileStorageService.storeFile(avatarFile);
