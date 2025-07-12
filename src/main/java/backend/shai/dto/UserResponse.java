@@ -2,7 +2,7 @@ package backend.shai.dto;
 
 import backend.shai.model.User;
 
-public class UserResponse {
+public class UserResponse extends User{
     private Long id;
     private String username;
 

@@ -1,6 +1,7 @@
 package backend.shai.service;
 
 
+import backend.shai.dto.LoginRequest;
 import backend.shai.dto.UserRequest;
 import backend.shai.model.User;
 import backend.shai.repository.UserRepository;
@@ -21,6 +22,11 @@ public class AuthService {
     private JwtAuthenticationToken jwtAuthenticationToken;
 
     public User registerUser(UserRequest userRequest) {
-        
+        userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        return userRepo.save(userRequest);
+    }
+
+    public String login(LoginRequest loginRequest) {
+        userRepo
     }
 }
