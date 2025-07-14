@@ -1,4 +1,4 @@
 package backend.shai.security;
 
-public class JwAuthFilter {
+public class JwtAuthFilter {
 }
