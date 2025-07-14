@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private JwtAuthenticationToken jwtAuthenticationToken;
+    private JwtAuthenticationProvider authenticationProvider;
 
     @Transactional
     public User registerUser(@NotNull UserRequest userRequest) {
@@ -31,6 +32,12 @@ public class AuthService {
 
     @Transactional
     public String login(LoginRequest loginRequest) {
-        User user = userRepo.existsByUsername(loginRequest.getUsername());
+        User dbUser = userRepo.findByUsername(loginRequest.getUsername());
+
+        if (!passwordEncoder.matches(loginRequest.getPasswd(), dbUser.getPassword())) {
+            throw new RuntimeException("invalid password");
+        }
+
+        return authenticationProvider.authenticate(loginRequest);
     }
 }
