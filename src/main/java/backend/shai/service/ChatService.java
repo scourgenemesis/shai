@@ -15,6 +15,6 @@ public class ChatService {
 
     @Transactional
     private Chat createChat(@RequestBody String chatName, String type) {
-        chatRepo.
+        chatRepo
     }
 }
