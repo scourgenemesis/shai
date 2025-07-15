@@ -5,12 +5,14 @@ import backend.shai.dto.LoginRequest;
 import backend.shai.dto.UserRequest;
 import backend.shai.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Configuration
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

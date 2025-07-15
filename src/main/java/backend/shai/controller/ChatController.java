@@ -16,8 +16,8 @@ public class ChatController {
     @Autowired
     private ChatService chatService;
 
-    @PostMapping
-    public Chat createChat(@RequestBody ChatDto chatDto) {
-        return chatService.crea
-    }
+//    @PostMapping
+//    public Chat createChat(@RequestBody ChatDto chatDto) {
+//        return chatService.crea
+//    }
 }

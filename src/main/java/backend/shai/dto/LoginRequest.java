@@ -6,6 +6,11 @@ public class LoginRequest {
     @NotBlank private String username;
     @NotBlank private String passwd;
 
+    public LoginRequest(String username, String passwd) {
+        this.username = username;
+        this.passwd = passwd;
+    }
+
     public String getUsername() {
         return username;
     }

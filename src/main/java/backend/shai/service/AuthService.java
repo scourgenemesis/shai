@@ -5,12 +5,11 @@ import backend.shai.dto.LoginRequest;
 import backend.shai.dto.UserRequest;
 import backend.shai.model.User;
 import backend.shai.repository.UserRepository;
+import backend.shai.util.JwtTokenProvider;
 import jakarta.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,7 +21,7 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private JwtAuthenticationProvider authenticationProvider;
+    private JwtTokenProvider tokenProvider;
 
     @Transactional
     public User registerUser(@NotNull UserRequest userRequest) {
@@ -38,6 +37,6 @@ public class AuthService {
             throw new RuntimeException("invalid password");
         }
 
-        return authenticationProvider.authenticate(loginRequest);
+        return tokenProvider.generateToken(dbUser.getUsername());
     }
 }

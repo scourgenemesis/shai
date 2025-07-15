@@ -14,6 +14,11 @@ public class UserRequest extends User {
 
     private String avatarUrl;
 
+    public UserRequest(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }

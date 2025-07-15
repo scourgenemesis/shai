@@ -25,11 +25,11 @@ public class MessageService {
     @Autowired
     private WebSocketService webSocketService;
 
-    public Message sendMessage(MessageDto messageDto) {
-
-    }
-
-    public Message getMessages(MessageDto messageDto) {
-        
-    }
+//    public Message sendMessage(MessageDto messageDto) {
+//
+//    }
+//
+//    public Message getMessages(MessageDto messageDto) {
+//
+//    }
 }

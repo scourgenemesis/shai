@@ -15,18 +15,18 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @PostMapping
-    public Message sendMessage(@RequestBody MessageDto messageDto) {
-        return messageService.sendMessage(messageDto);
-    }
+//    @PostMapping
+//    public Message sendMessage(@RequestBody MessageDto messageDto) {
+//        return messageService.sendMessage(messageDto);
+//    }
 
 
-    @GetMapping("/chat/{chatId}")
-    public List<Message> getMessages(
-            @PathVariable Long chatId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "50") int size
-    ) {
-
-    }
+//    @GetMapping("/chat/{chatId}")
+//    public List<Message> getMessages(
+//            @PathVariable Long chatId,
+//            @RequestParam(defaultValue = "0") int page,
+//            @RequestParam(defaultValue = "50") int size
+//    ) {
+//
+//    }
 }

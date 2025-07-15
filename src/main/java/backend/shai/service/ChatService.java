@@ -13,8 +13,8 @@ public class ChatService {
     @Autowired
     private ChatRepository chatRepo;
 
-    @Transactional
-    private Chat createChat(@RequestBody String chatName, String type) {
-        chatRepo
-    }
+//    @Transactional
+//    private Chat createChat(@RequestBody String chatName, String type) {
+//        chatRepo
+//    }
 }

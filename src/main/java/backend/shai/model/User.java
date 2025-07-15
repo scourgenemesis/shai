@@ -19,6 +19,13 @@ public class User {
     private String password;
     private String avatarUrl;
     private UserStatus userStatus;
+    private String email;
+
+//    public User(String username, String password, String email) {
+//        this.username = username;
+//        this.password = password;
+//        this.email = email;
+//    }
 
     public Long getId() {
         return id;
@@ -42,6 +49,14 @@ public class User {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setUsername(String username) {
