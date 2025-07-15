@@ -47,10 +47,10 @@ public class UserService {
         user.setAvatarUrl(avatarUrl);
         userRepo.save(user);
     }
-    
 
-//    public User deteleUser(User user) {
-//
-//    }
+
+    public User searchUsers(String username) {
+        return userRepo.findByUsername(username);
+    }
 
 }

@@ -17,14 +17,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUserById();
-    }
+//    @GetMapping("/users/{id}")
+//    public User getUserById(@PathVariable Long id) {
+//        return userService.getUserById();
+//    }
 
     @PostMapping
     public User createUser(@Valid @RequestBody UserRequest userRequest, MultipartFile avatarUrl) throws IOException {
-//        return userService.registerUser(userRequest, avatarUrl);
+        return userService.registerUser(userRequest, avatarUrl);
     }
 
     @PostMapping
@@ -33,8 +33,7 @@ public class UserController {
     }
 
     @GetMapping("/search")
-    public List<User> searchUsers(@RequestParam String username) {
+    public User searchUsers(@RequestParam String username) {
         return userService.searchUsers(username);
     }
-
 }
