@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -49,7 +50,7 @@ public class UserService {
     }
 
 
-    public User searchUsers(String username) {
+    public Optional<User> searchUsers(String username) {
         return userRepo.findByUsername(username);
     }
 }

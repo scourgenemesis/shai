@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,6 +43,7 @@ public class AuthServiceTest {
         UserRequest request = new UserRequest("testuser", "Password123!");
         when(userRepo.existsByUsername("testuser")).thenReturn(false);
         when(passwordEncoder.encode("Password123!")).thenReturn("hashedPass");
+        when(userRepo.save(any(User.class))).thenReturn(new User());
 
         // Act
         authService.registerUser(request);
@@ -55,6 +57,8 @@ public class AuthServiceTest {
         // Arrange
         LoginRequest request = new LoginRequest("testuser", "Password123!");
         User mockUser = new User();
+        mockUser.setUsername("testUser");
+        mockUser.setPassword("hashedPass");
 
         when(userRepo.findByUsername("testuser")).thenReturn(Optional.of(mockUser));
         when(passwordEncoder.matches("Password123!", "hashedPass")).thenReturn(true);

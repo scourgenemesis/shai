@@ -31,7 +31,7 @@ public class AuthService {
 
     @Transactional
     public String login(LoginRequest loginRequest) {
-        User dbUser = userRepo.findByUsername(loginRequest.getUsername());
+        User dbUser = userRepo.findByUsername(loginRequest.getUsername()).orElseThrow(() -> new RuntimeException("User not found"));
 
         if (!passwordEncoder.matches(loginRequest.getPasswd(), dbUser.getPassword())) {
             throw new RuntimeException("invalid password");

@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -33,7 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/search")
-    public User searchUsers(@RequestParam String username) {
+    public Optional<User> searchUsers(@RequestParam String username) {
         return userService.searchUsers(username);
     }
 }
