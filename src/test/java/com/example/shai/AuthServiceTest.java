@@ -41,7 +41,7 @@ public class AuthServiceTest {
     void registerUser_Success() {
         // Arrange
         UserRequest request = new UserRequest("testuser", "Password123!");
-        when(userRepo.existsByUsername("testuser")).thenReturn(false);
+//        when(userRepo.existsByUsername("testuser")).thenReturn(false);
         when(passwordEncoder.encode("Password123!")).thenReturn("hashedPass");
         when(userRepo.save(any(User.class))).thenReturn(new User());
 
@@ -55,14 +55,14 @@ public class AuthServiceTest {
     @Test
     void loginUser_ValidCredentials() {
         // Arrange
-        LoginRequest request = new LoginRequest("testuser", "Password123!");
+        LoginRequest request = new LoginRequest("testUser", "Password123!");
         User mockUser = new User();
         mockUser.setUsername("testUser");
         mockUser.setPassword("hashedPass");
 
-        when(userRepo.findByUsername("testuser")).thenReturn(Optional.of(mockUser));
+        when(userRepo.findByUsername("testUser")).thenReturn(Optional.of(mockUser));
         when(passwordEncoder.matches("Password123!", "hashedPass")).thenReturn(true);
-        when(jwtTokenProvider.generateToken("testuser")).thenReturn("mockJwtToken");
+        when(jwtTokenProvider.generateToken("testUser")).thenReturn("mockJwtToken");
 
         // Act
         String token = authService.login(request);
