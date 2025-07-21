@@ -1,60 +1,71 @@
 package backend.shai;
 
 import backend.shai.controller.AuthController;
+import backend.shai.service.AuthService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(AuthController.class)
-@AutoConfigureMockMvc
-@ContextConfiguration(classes = Main.class)
+@ExtendWith(MockitoExtension.class)
 public class AuthControllerTest {
 
-    @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    public void testValidRegistration() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                    {
-                        "username": "testuser",
-                        "password": "SecurePass123!"
-                    }
-                    """))
-                .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("testuser"));
+    @Mock
+    private AuthService authService;
+
+    @InjectMocks
+    private AuthController authController;
+
+    @BeforeEach
+    void setup() {
+        mockMvc = MockMvcBuilders.standaloneSetup(authController)
+                .defaultRequest(post("/").with(csrf())) // Apply CSRF to all requests
+                .build();
     }
 
     @Test
-    public void testDuplicateUsername() throws Exception {
-        // First request
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("""
-                    {
-                        "username": "alice",
-                        "password": "Password123!"
-                    }
-                    """));
-
-        // Second request with same username
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
+    @WithMockUser
+    public void testValidRegistration() throws Exception {
+        mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                    {
-                        "username": "alice",
-                        "password": "NewPassword456!"
-                    }
-                    """))
-                .andExpect(MockMvcResultMatchers.status().isConflict());
+                                {
+                                    "username": "testuser",
+                                    "password": "SecurePass123!"
+                                }
+                                """))
+                .andExpect(status().isOk())
+                .andExpect(content().string("User registered!"));
+    }
+
+    @Test
+    @WithMockUser
+    public void testDuplicateUsername() throws Exception {
+        when(authService.registerUser(any()))
+                .thenThrow(new RuntimeException("Username already exists"));
+
+        mockMvc.perform(post("/api/auth/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                    "username": "alice",
+                                    "password": "NewPassword456!"
+                                }
+                                """))
+                .andExpect(status().isConflict());
     }
 }

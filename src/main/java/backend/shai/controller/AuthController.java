@@ -20,6 +20,11 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody UserRequest userRequest) {
         authService.registerUser(userRequest);
