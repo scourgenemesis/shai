@@ -1,14 +1,14 @@
-package com.example.shai;
+package backend.shai;
 
-import backend.shai.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -17,13 +17,9 @@ public class AuthControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private UserRepository userRepo;
-
-
     @Test
     public void testValidRegistration() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
+        mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                     {
@@ -31,14 +27,14 @@ public class AuthControllerTest {
                         "password": "SecurePass123!"
                     }
                     """))
-                .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("testuser"));
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.username").value("testuser"));
     }
 
     @Test
     public void testDuplicateUsername() throws Exception {
-        // First registration (success)
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
+        // First request
+        mockMvc.perform(post("/api/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                     {
@@ -47,8 +43,8 @@ public class AuthControllerTest {
                     }
                     """));
 
-        // Second registration (fail)
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
+        // Second request with same username
+        mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                     {
@@ -56,6 +52,6 @@ public class AuthControllerTest {
                         "password": "NewPassword456!"
                     }
                     """))
-                .andExpect(MockMvcResultMatchers.status().isConflict());
+                .andExpect(status().isConflict());
     }
 }

@@ -1,4 +1,4 @@
-package com.example.shai;
+package backend.shai;
 
 
 import backend.shai.dto.LoginRequest;
