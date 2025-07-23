@@ -10,16 +10,15 @@ public class MessageDto {
     private String content;
     private LocalDateTime timestamp;
 
-    public MessageDto(Long senderId, Long chatId, String content, LocalDateTime timestamp) {
-        this.senderId = senderId;
-        this.chatId = chatId;
-        this.content = content;
-        this.timestamp = timestamp;
+    public MessageDto() {
     }
 
     public static MessageDto fromEntity(Message msg) {
         MessageDto dto = new MessageDto();
-        dto
+        dto.setSenderId(msg.getId());
+        dto.setContent(msg.getContent());
+        dto.setTimestamp(msg.getTimestamp());
+        dto.set
     }
 
     public Long getSenderId() {
