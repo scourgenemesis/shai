@@ -1,5 +1,7 @@
 package backend.shai.dto;
 
+import backend.shai.model.Message;
+
 import java.time.LocalDateTime;
 
 public class MessageDto {
@@ -13,6 +15,11 @@ public class MessageDto {
         this.chatId = chatId;
         this.content = content;
         this.timestamp = timestamp;
+    }
+
+    public static MessageDto fromEntity(Message msg) {
+        MessageDto dto = new MessageDto();
+        dto
     }
 
     public Long getSenderId() {
