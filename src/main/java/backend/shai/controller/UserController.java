@@ -5,6 +5,7 @@ import backend.shai.model.User;
 import backend.shai.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,10 +19,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @GetMapping("/users/{id}")
-//    public User getUserById(@PathVariable Long id) {
-//        return userService.getUserById();
-//    }
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return userService.getUserById();
+    }
 
     @PostMapping
     public User createUser(@Valid @RequestBody UserRequest userRequest, MultipartFile avatarUrl) throws IOException {

@@ -15,10 +15,10 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-//    @PostMapping
-//    public Message sendMessage(@RequestBody MessageDto messageDto) {
-//        return messageService.sendMessage(messageDto);
-//    }
+    @PostMapping
+    public Message sendMessage(@RequestBody MessageDto messageDto) {
+        return messageService.sendMessage(messageDto);
+    }
 
 
 //    @GetMapping("/chat/{chatId}")
