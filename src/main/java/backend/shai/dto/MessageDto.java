@@ -18,7 +18,7 @@ public class MessageDto {
         dto.setSenderId(msg.getId());
         dto.setContent(msg.getContent());
         dto.setTimestamp(msg.getTimestamp());
-        dto.set
+        return dto;
     }
 
     public Long getSenderId() {
