@@ -3,6 +3,7 @@ package backend.shai.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDateTime;
 
@@ -12,9 +13,12 @@ public class Message {
     @Id @GeneratedValue
     private Long id;
     private User sender;
+
+    @ManyToOne
     private User recipient;
     private LocalDateTime timestamp;
     private MessageStatus MessageStatus;
+
 
     public String getContent() {
         return content;

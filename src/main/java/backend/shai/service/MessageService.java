@@ -37,7 +37,7 @@ public class MessageService {
         msg.setContent(dto.getContent());
         msg.setTimestamp(LocalDateTime.now());
         msg = messageRepo.save(msg);
-        return new MessageDto()
+        return new MessageDto();
     }
 
 
