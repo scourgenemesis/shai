@@ -16,12 +16,10 @@ public class Group {
     @ManyToOne
     private User owner;
 
-    private String type;
-
     @ManyToMany
     private Set<User> members;
 
-    
+   private GroupType type;
 
     public enum GroupType {
         CHANNEL,
