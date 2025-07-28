@@ -1,9 +1,9 @@
 package backend.shai.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 public class Group {
@@ -14,5 +14,17 @@ public class Group {
     private int id;
 
     @ManyToOne
-    private User 
+    private User owner;
+
+    private String type;
+
+    @ManyToMany
+    private Set<User> members;
+
+    
+
+    public enum GroupType {
+        CHANNEL,
+        GROUP
+    }
 }
