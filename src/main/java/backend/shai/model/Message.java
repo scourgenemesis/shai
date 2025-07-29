@@ -12,7 +12,12 @@ public class Message {
     private String content;
     @Id @GeneratedValue
     private Long id;
+
+    @ManyToOne
     private User sender;
+
+    @ManyToOne
+    private Chat chat;
 
     @ManyToOne
     private User recipient;

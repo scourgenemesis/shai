@@ -106,4 +106,8 @@ public class Chat {
     public enum ChatType {
         PRIVATE, GROUP, CHANNEL
     }
+
+    public enum ChatPermissions {
+        CREATE_POST, DELETE_POST, BAN_USERS,
+    }
 }
