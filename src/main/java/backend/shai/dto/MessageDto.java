@@ -1,32 +1,29 @@
 package backend.shai.dto;
 
 import backend.shai.model.Message;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@Data
 public class MessageDto {
+    @Getter
+    private String sender;
+    @Getter
     private Long senderId;
     private Long chatId;
     private String content;
     private LocalDateTime timestamp;
 
-    public MessageDto() {
+    public MessageDto(String username, Long senderId, Long id1, String content, LocalDateTime timestamp) {
+
     }
 
     public static MessageDto fromEntity(Message msg) {
-        MessageDto dto = new MessageDto();
-        dto.setSenderId(msg.getId());
-        dto.setContent(msg.getContent());
-        dto.setTimestamp(msg.getTimestamp());
-        return dto;
-    }
-
-    public Long getSenderId() {
-        return senderId;
-    }
-
-    public void setSenderId(Long senderId) {
-        this.senderId = senderId;
+        return new MessageDto(msg.getSender().getUsername(), msg.getSender().getId(), msg.getChat().getId(), msg.getContent(), msg.getTimestamp());
     }
 
     public Long getChatId() {

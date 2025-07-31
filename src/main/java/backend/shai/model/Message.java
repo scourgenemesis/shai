@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
@@ -35,6 +36,14 @@ public class Message {
 
     public Long getId() {
         return id;
+    }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public Chat getChat() {
+        return chat;
     }
 
     public User getRecipient() {
