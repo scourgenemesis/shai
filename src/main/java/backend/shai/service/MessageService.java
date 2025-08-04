@@ -9,10 +9,14 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -39,9 +43,10 @@ public class MessageService {
 
 
     @Transactional
-    public List<MessageDto> getMessagesByChatId(Long chatId) {
-        List<Message> messages = messageRepo.findByChatIdOrderByTimestampAsc(chatId);
-        return messages.stream().map(MessageDto::fromEntity).toList();
+    public Page<MessageDto> getMessagesByChatId(Long chatId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("timestamp").descending());
+        Page<Message> messages = messageRepo.findByChatId(chatId, pageable);
+        return messages.map(MessageDto::fromEntity);
     }
 
     @Transactional
