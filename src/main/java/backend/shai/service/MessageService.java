@@ -72,7 +72,7 @@ public class MessageService {
     @Transactional
     public Page<MessageDto> findByContent(String text, long id, int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("timestamp").descending());
-        Page<Message> messages = messageRepo.findByContent(id, text, pageable);
+        Page<Message> messages = messageRepo.findByContentContainingIgnoreCase(id, text, pageable);
         return messages.map(MessageDto::fromEntity);
     }
 }
