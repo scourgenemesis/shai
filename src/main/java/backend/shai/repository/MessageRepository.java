@@ -13,5 +13,5 @@ import java.util.List;
 public interface MessageRepository extends JpaRepository<Message, Long> {
     Page<Message> findByChatId(Long chatId, Pageable pageable);
     Page<Message> findByContent(Long chatId, String content);
-    Page<Message> findByFileNameContaining(Long chatId, )
+    Page<Message> findByFileNameContaining(Long chatId, String filename);
 }

@@ -31,9 +31,12 @@ public class MessageController {
     }
 
     @PostMapping
-    public MessageDto deleteMessage(@RequestBody MessageDto messageDto) {
-
+    public void deleteMessage(@PathVariable Long id) {
+        messageService.deleteMessage(id);
     }
 
-
+    @PostMapping
+    public MessageDto editMessage(@PathVariable Long id, @RequestBody String newContent) {
+        return messageService.editMessage(id, newContent);
+    }
 }
