@@ -39,4 +39,6 @@ public class MessageController {
     public MessageDto editMessage(@PathVariable Long id, @RequestBody String newContent) {
         return messageService.editMessage(id, newContent);
     }
+
+
 }
