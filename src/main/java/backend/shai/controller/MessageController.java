@@ -40,8 +40,13 @@ public class MessageController {
         return messageService.editMessage(id, newContent);
     }
 
-    @GetMapping("/chat/{chatId}/search  ")
+    @GetMapping("/chat/{chatId}/search")
     public Page<MessageDto> findByChatIdContainingIgnoreCase(@PathVariable Long chatId, @RequestParam String text, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
         return messageService.findByContent(text, chatId, page, size);
+    }
+
+    @GetMapping("/search")
+    public Page<MessageDto> searchAllChats(@RequestParam String text, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
+        return messageService.searchAllChats(text, page, size);
     }
 }
