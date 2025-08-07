@@ -13,5 +13,6 @@ import java.util.List;
 public interface MessageRepository extends JpaRepository<Message, Long> {
     Page<Message> findByChatId(Long chatId, Pageable pageable);
     Page<Message> findByContentContainingIgnoreCase(Long chatId, String content, Pageable pageable);
+    Page<Message> searchAllChats(String content, Pageable pageable);
     Page<Message> findByFileNameContaining(Long chatId, String filename);
 }

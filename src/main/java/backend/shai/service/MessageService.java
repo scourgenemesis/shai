@@ -16,7 +16,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Service
@@ -73,6 +72,13 @@ public class MessageService {
     public Page<MessageDto> findByContent(String text, long id, int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("timestamp").descending());
         Page<Message> messages = messageRepo.findByContentContainingIgnoreCase(id, text, pageable);
+        return messages.map(MessageDto::fromEntity);
+    }
+
+    @Transactional
+    public Page<MessageDto> searchAllChats(String text, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("timestamp").descending());
+        Page<Message> messages = messageRepo.searchAllChats(text, pageable);
         return messages.map(MessageDto::fromEntity);
     }
 }
