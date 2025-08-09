@@ -17,7 +17,7 @@ public class ChatController {
     private ChatService chatService;
 
     @PostMapping
-    public Chat createChat(@RequestBody ChatDto chatDto) {
-        return chatService.createChat
+    public Chat createChat(@RequestBody Chat chat, Long id) {
+        return chatService.createChat(chat, id);
     }
 }
