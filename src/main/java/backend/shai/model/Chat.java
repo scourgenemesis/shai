@@ -1,6 +1,7 @@
 package backend.shai.model;
 
 import jakarta.persistence.*;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -14,6 +15,7 @@ public class Chat {
     private String name;
 
     @Enumerated(EnumType.STRING)
+    @Setter
     private ChatType type;
 
     @ManyToMany(fetch = FetchType.LAZY)
